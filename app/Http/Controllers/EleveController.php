@@ -18,10 +18,24 @@ class EleveController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
 
-        $eleves = Eleve::paginate(10);
+        $eleves = Eleve::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('nom', 'LIKE', "%{$search}%")
+                            ->orWhere('prenom', 'LIKE', "%{$search}%")
+                            ->orWhere('numeroEtudiant', 'LIKE', "%{$search}%")
+                            ->orWhere('email', 'LIKE', "%{$search}%");
+            })
+            ->paginate(10);
+
+        // If it's a search, append the search query to pagination links
+        if ($search) {
+            $eleves->appends(['search' => $search]);
+        }
+
         return view('eleve.index', compact('eleves'));
     }
 

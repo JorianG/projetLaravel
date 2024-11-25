@@ -1,8 +1,7 @@
 @extends('layouts.app')  {{-- Changed from layout.app --}}
 @section('title', 'Liste des Eleves')
 @section('content')
-    <div class=" mt-2">
-
+    <div class="mt-2">
         {{-- Message flash pour les notifications --}}
         @if(session('success'))
             <div class="alert alert-success">
@@ -10,9 +9,24 @@
             </div>
         @endif
 
-        <div class="mb-3">
-        
-            <a href="{{ route('eleve.create') }}" class="btn btn-primary"><i class="bi bi-person-plus-fill me-1"></i>  Ajouter un Eleve</a>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <a href="{{ route('eleve.create') }}" class="btn btn-primary">
+                    <i class="bi bi-person-plus-fill me-1"></i> Ajouter un Eleve
+                </a>
+            </div>
+            <div class="col-md-6">
+                <form action="{{ route('eleve.index') }}" method="GET" class="d-flex">
+                    <input type="text" 
+                           name="search" 
+                           class="form-control me-2" 
+                           placeholder="Rechercher par nom, prénom ou numéro étudiant..."
+                           value="{{ request('search') }}">
+                    <button type="submit" class="btn btn-outline-primary">
+                        <i class="bi bi-search"></i> Rechercher
+                    </button>
+                </form>
+            </div>
         </div>
 
         <table class="table table-striped">
@@ -43,7 +57,10 @@
                         <form action="{{ route('eleve.destroy', $eleve->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élève?');">Supprimer</button>
+                            <button type="submit" class="btn btn-danger btn-sm" 
+                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élève?');">
+                                Supprimer
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -51,8 +68,8 @@
             </tbody>
         </table>
 
-        <ul class="pagination justify-content-end ">
+        <div class="d-flex justify-content-end">
             {{ $eleves->links('pagination::bootstrap-4') }}
-        </ul>
+        </div>
     </div>
 @endsection
