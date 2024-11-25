@@ -27,7 +27,7 @@ class Eleve extends Model
     {
         // TODO : Implementer les coef dans la moyenne
         $notes = $this->evaluationEleves->pluck('note');
-        $moyenne = $notes->avg();
+        $moyenne = round($notes->avg(),1);
         return $moyenne;
     }
 }
