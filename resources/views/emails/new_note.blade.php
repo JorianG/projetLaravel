@@ -1,17 +1,19 @@
 @component('mail::message')
 # New Grade Notification
 
-Hello {{ $student->name }},
+Bonjour {{ $student->nom }} {{ $student->prenom }},
 
-A new grade has been recorded for you.
+Un nouvelle note vient d'être entrée.
 
-- **Grade:** {{ $grade->note }}
-- **Date:** {{ \Carbon\Carbon::parse($date)->format('d/m/Y') }}
+- **Titre de l'évaluation :** {{ $grade->evaluation->titre }}
+- **Date de l'évaluation:** {{ \Carbon\Carbon::parse($date)->format('d/m/Y') }}
+- **Module de l'évaluation :** {{ $grade->evaluation->module->name }}
+- **Note:** {{ $grade->note }}
 
 @component('mail::button', ['url' => config('app.url')])
-View Your Grades
+Voir vos notes
 @endcomponent
 
-Best regards,<br>
+Cordialement,<br>
 {{ config('app.name') }}
 @endcomponent 
