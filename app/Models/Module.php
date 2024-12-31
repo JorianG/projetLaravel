@@ -10,7 +10,7 @@ class Module extends Model
     use HasFactory;
 
     protected $table = 'module';
-    protected $fillable = ['code', 'name'];
+    protected $fillable = ['code', 'name', 'coefficient'];
 
     public function evaluations()
     {

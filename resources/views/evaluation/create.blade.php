@@ -7,15 +7,7 @@
 @section('content')
     <div class="max-w-lg mx-auto mt-10 bg-white p-8 rounded-lg shadow-md">
 
-        @if ($errors->any())
-            <div class="mb-4">
-                <ul class="list-disc list-inside text-red-500">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+
 
         <form action="{{ route('evaluation.store') }}" class="form-control mt-2" method="POST">
             @csrf

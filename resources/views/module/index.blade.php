@@ -20,6 +20,8 @@
                 <th>ID</th>
                 <th>Code</th>
                 <th>Nom</th>
+                <th>Coefficient</th>
+                
                 <th>Actions</th>
             </tr>
             </thead>
@@ -29,6 +31,7 @@
                     <td>{{ $module->id }}</td>
                     <td>{{ $module->code }}</td>
                     <td>{{ $module->name }}</td>
+                    <td>{{ $module->coefficient }}</td>
                     <td>
                         <a href="{{ route('module.show', $module->id) }}" class="btn btn-primary btn-sm">Voir</a>
                         <a href="{{ route('module.edit', $module->id) }}" class="btn btn-warning btn-sm">Modifier</a>

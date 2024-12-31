@@ -33,6 +33,8 @@ class DatabaseSeeder extends Seeder
             $module = \App\Models\Module::create([
                 'code' => $faker->unique()->randomNumber(5),
                 'name' => $faker->sentence(3),
+                'coefficient' => $faker->randomNumber(1),
+
             ]);
 
             // Create 5 evaluations for each module

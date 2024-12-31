@@ -8,7 +8,7 @@ Un nouvelle note vient d'être entrée.
 - **Titre de l'évaluation :** {{ $grade->evaluation->titre }}
 - **Date de l'évaluation:** {{ \Carbon\Carbon::parse($date)->format('d/m/Y') }}
 - **Module de l'évaluation :** {{ $grade->evaluation->module->name }}
-- **Note:** {{ $grade->note }}
+- **Note:** {{ $grade->note }} /20
 
 @component('mail::button', ['url' => config('app.url')])
 Voir vos notes

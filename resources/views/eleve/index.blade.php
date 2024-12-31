@@ -33,6 +33,7 @@
             <thead>
             <tr>
                 <th>ID</th>
+                <th>Image</th>
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Date de Naissance</th>
@@ -45,6 +46,7 @@
             @foreach($eleves as $eleve)
                 <tr>
                     <td>{{ $eleve->id }}</td>
+                    <td><img src="{{ asset('storage/' . $eleve->image) }}" alt="Image" style="max-width:50px;"></td>
                     <td>{{ $eleve->nom }}</td>
                     <td>{{ $eleve->prenom }}</td>
                     <td>{{ $eleve->dateNaissance }}</td>
@@ -52,7 +54,9 @@
                     <td>{{ $eleve->numeroEtudiant }}</td>
                     <td>
                         <a href="{{ route('eleve.show', $eleve->id) }}" class="btn btn-primary btn-sm">Profil</a>
+                        @can('access-evaluation-management')
                         <a href="{{ route('notesEleve', $eleve->id) }}" class="btn btn-primary btn-sm">Notes</a>
+                        @endcan
                         <a href="{{ route('eleve.edit', $eleve->id) }}" class="btn btn-warning btn-sm">Modifier</a>
                         <form action="{{ route('eleve.destroy', $eleve->id) }}" method="POST" style="display:inline;">
                             @csrf

@@ -70,14 +70,17 @@
                 <br>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
+                        @auth
                         <li class="nav-item">
                         <a class="nav-link text-light active" aria-current="page" href="{{ url('/') }}">Home</a>
                         </li>
+                        @endauth
                         
-                       
+                       @auth
                         <li class="nav-item">
                         <a class="nav-link text-light" href="{{ url('/eleve') }}">Eleves</a>
                         </li>
+                        @endauth
 
 
                         @can('access-module-management')
@@ -90,6 +93,14 @@
                         <li class="nav-item">
                         <a class="nav-link text-light" href="{{ url('/evaluation') }}">Evals</a>
                         </li>
+                        @endcan
+
+                        @can('access-module-management')
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="{{ route('api-tokens.index') }}">
+                                    API Tokens
+                                </a>
+                            </li>
                         @endcan
 
                     </ul>
@@ -142,6 +153,7 @@
         </nav>
 
         <main class="py-4 container">
+          
             @yield('content')
 
         </main>

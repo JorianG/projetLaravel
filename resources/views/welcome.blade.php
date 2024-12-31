@@ -1,55 +1,17 @@
 <!-- resources/views/welcome.blade.php -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            text-align: center;
-            padding: 50px;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-        a {
-            display: block;
-            margin: 10px 0;
-            padding: 10px;
-            background-color: #3490dc;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        a:hover {
-            background-color: #2779bd;
-        }
-    </style>
-</head>
-<body>
+@extends('layouts.app')
+@section('title', 'Welcome to Our Application')
+@section('content')
     <div class="container">
-        <h1>Welcome to Our Application</h1>
-        <a href="{{ url('/eleve') }}">Go to Eleve</a>
+        <h1>Bienvenue sur mon application des gestion de notes</h1>
+        <a href="{{ url('/eleve') }}" class="btn btn-primary">Liste des Eleves</a>
         
         @can('access-module-management')
-        <a href="{{ url('/module') }}">Go to Modules</a>
+        <a href="{{ url('/module') }}" class="btn btn-primary">Liste des Modules</a>
         @endcan
 
         @can('access-evaluation-management')
-        <a href="{{ url('/evaluation') }}">Go to Evals</a>
+        <a href="{{ url('/evaluation') }}" class="btn btn-primary">Liste des Evaluations</a>
         @endcan
     </div>
-</body>
-</html>
+@endsection

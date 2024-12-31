@@ -3,6 +3,7 @@
 use App\Http\Controllers\EleveController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\ApiTokenController;
 use App\Models\Eleve;
 use App\Models\Module;
 use App\Models\Evaluation;
@@ -68,6 +69,13 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/evaluation/{evaluation}/grade/{evaluationEleve}', [EvaluationController::class, 'deleteGrade'])
         ->name('evaluation.deleteGrade')
         ->middleware('can:access-evaluation-management');
+});
+
+Route::middleware(['auth', 'can:access-module-management'])->group(function () {
+    Route::get('/api-tokens', [ApiTokenController::class, 'index'])->name('api-tokens.index');
+    Route::post('/api-tokens', [ApiTokenController::class, 'store'])->name('api-tokens.store');
+    Route::delete('/api-tokens/{token}', [ApiTokenController::class, 'destroy'])->name('api-tokens.destroy');
+    Route::patch('/api-tokens/{token}/toggle', [ApiTokenController::class, 'toggleActive'])->name('api-tokens.toggle');
 });
 
 Auth::routes();

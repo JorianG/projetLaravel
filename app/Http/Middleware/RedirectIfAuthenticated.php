@@ -19,6 +19,11 @@ class RedirectIfAuthenticated
     {
         $guards = empty($guards) ? [null] : $guards;
 
+        // Check if the request is an API request
+        if ($request->is('api/*')) {
+            return $next($request); // Allow API requests to proceed without redirection
+        }
+
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
                 return redirect(RouteServiceProvider::HOME);

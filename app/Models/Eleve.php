@@ -25,9 +25,20 @@ class Eleve extends Model
 
     public function moyenne()
     {
-        // TODO : Implementer les coef dans la moyenne
-        $notes = $this->evaluationEleves->pluck('note');
-        $moyenne = round($notes->avg(),1);
+        $evaluationEleves = $this->evaluationEleves->load('evaluation.module');
+        $totalNotes = 0;
+        $totalCoef = 0;
+        
+        foreach ($evaluationEleves as $evaluationEleve) {
+            $note = $evaluationEleve->note;
+            $evalCoef = $evaluationEleve->evaluation->coeficient;
+            $moduleCoef = $evaluationEleve->evaluation->module->coefficient;
+
+            $totalNotes += $note * $evalCoef * $moduleCoef;
+            $totalCoef += $evalCoef * $moduleCoef;
+        }
+        
+        $moyenne = $totalCoef > 0 ? round($totalNotes / $totalCoef, 1) : 0; 
         return $moyenne;
     }
 }

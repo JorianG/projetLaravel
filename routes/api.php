@@ -1,19 +1,14 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\EleveApiController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/test', function () {
+    return response()->json(['message' => 'API is working']);
+});
+
+Route::middleware('verify.api.token')->group(function () {
+    Route::get('/eleves', [EleveApiController::class, 'index']);
+    Route::get('/eleves/{id}/exportNotes', [EleveApiController::class, 'exportNotes']);
 });
